@@ -1,8 +1,11 @@
 package com.javarush.task.task32.task3209;
 
 import com.javarush.task.task32.task3209.listeners.FrameListener;
+import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
+import javafx.scene.layout.BorderPane;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +48,23 @@ public class View extends JFrame implements ActionListener {
     }
     //метод будет отвечать за инициализацию панелей редактора
     public void initEditor() {
-
+        //Устанавливаем значение "text/html" в качестве типа контента для компонента htmlTextPane
+        htmlTextPane.setContentType("text/html");
+        //Создаём новый локальный компонент JScrollPane на базе htmlTextPane
+        JScrollPane jScrollHTMLTextPane = new JScrollPane(htmlTextPane);
+        //Добавляем вкладку в панель tabbedPane с именем "HTML" и компонентом JScrollPane
+        tabbedPane.add("HTML",jScrollHTMLTextPane);
+        //Создаём новый локальный компонент JScrollPane на базе plainTextPane
+        JScrollPane  jScrollPlainTextPane = new JScrollPane(plainTextPane);
+        //Добавляем еще одну вкладку в tabbedPane с именем "Текст" и компонентом jScrollPlainTextPane
+        tabbedPane.add("Текст",jScrollPlainTextPane);
+        //Устанавливаем предпочтительный размер панели tabbedPane
+        tabbedPane.setPreferredSize(new Dimension(800,600));
+        //Создаём объект класса TabbedPaneChangeListener
+        TabbedPaneChangeListener tabbedPaneChangeListener = new TabbedPaneChangeListener(this);
+        //Устанавливаем TabbedPaneChangeListener в качестве слушателя изменений в tabbedPane
+        tabbedPane.addChangeListener(tabbedPaneChangeListener);
+        getContentPane().add(tabbedPane, BorderLayout.CENTER);
     }
     //метод будет инициализировать графический интерфейс
     public void initGui() {
