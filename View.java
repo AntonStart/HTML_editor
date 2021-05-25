@@ -31,9 +31,7 @@ public class View extends JFrame implements ActionListener {
 
     public void init() {
         initGui();
-        // создаём экземпляр слушателя нашего окна
         FrameListener frameListener = new FrameListener(this);
-        //Добавляем слушателя событий нашего окна
         addWindowListener(frameListener);
         setVisible(true);
     }
@@ -54,5 +52,8 @@ public class View extends JFrame implements ActionListener {
         initMenuBar();
         initEditor();
         pack();
+    }
+
+    public void selectedTabChanged() {
     }
 }
