@@ -23,6 +23,15 @@ public class View extends JFrame implements ActionListener {
         return controller;
     }
 
+    public View() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+
+    }
+
     public void setController(Controller controller) {
         this.controller = controller;
     }
@@ -44,7 +53,18 @@ public class View extends JFrame implements ActionListener {
     }
     //метод будет отвечать за инициализацию меню редактора
     public void initMenuBar() {
-
+        //Создаём новый объект типа JMenuBar. Это и будет наша панель меню
+        JMenuBar jMenuBar = new JMenuBar();
+        //С помощью MenuHelper инициализируем меню в следующем порядке:
+        // Файл, Редактировать, Стиль, Выравнивание, Цвет, Шрифт и Помощь
+        MenuHelper.initFileMenu(this,jMenuBar);
+        MenuHelper.initEditMenu(this,jMenuBar);
+        MenuHelper.initStyleMenu(this,jMenuBar);
+        MenuHelper.initAlignMenu(this,jMenuBar);
+        MenuHelper.initColorMenu(this,jMenuBar);
+        MenuHelper.initFontMenu(this,jMenuBar);
+        MenuHelper.initHelpMenu(this,jMenuBar);
+        getContentPane().add(jMenuBar, BorderLayout.NORTH);
     }
     //метод будет отвечать за инициализацию панелей редактора
     public void initEditor() {

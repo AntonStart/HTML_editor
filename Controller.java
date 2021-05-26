@@ -1,5 +1,6 @@
 package com.javarush.task.task32.task3209;
 
+import javax.swing.*;
 import javax.swing.text.html.HTMLDocument;
 import java.io.File;
 
@@ -20,7 +21,7 @@ public class Controller {
         System.exit(0);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         View view = new View();
         Controller controller = new Controller(view);
         view.setController(controller);
