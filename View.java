@@ -2,11 +2,14 @@ package com.javarush.task.task32.task3209;
 
 import com.javarush.task.task32.task3209.listeners.FrameListener;
 import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
+import com.javarush.task.task32.task3209.listeners.TextEditMenuListener;
 import com.javarush.task.task32.task3209.listeners.UndoListener;
 import javafx.scene.layout.BorderPane;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.MenuListener;
+import javax.swing.text.Document;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -52,6 +55,19 @@ public class View extends JFrame implements ActionListener {
 
     public void resetUndo() {
         undoManager.discardAllEdits();
+    }
+    //выбирает вкладку HTML и сбрасывает все правки
+    public void selectHtmlTab() {
+        tabbedPane.setSelectedIndex(0);
+        resetUndo();
+    }
+    //получает документ у контроллера и устанавливает его в панель редактирования htmlTextPane
+    public void update() {
+        htmlTextPane.setDocument(controller.getDocument());
+    }
+    //показывает диалоговое окно с информацией о программе.
+    public void showAbout() {
+        JOptionPane.showMessageDialog(getContentPane(), "Version 1.0", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public boolean isHtmlTabSelected() {
