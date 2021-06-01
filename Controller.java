@@ -26,7 +26,7 @@ public class Controller {
     }
 
     public void init() {
-
+        createNewDocument();
     }
 
     public String getPlainText() {
@@ -68,5 +68,22 @@ public class Controller {
         view.setController(controller);
         view.init();
         controller.init();
+    }
+
+    public void createNewDocument() {
+        view.selectHtmlTab();
+        resetDocument();
+        view.setTitle("HTML редактор");
+        currentFile = null;
+
+    }
+
+    public void openDocument() {
+    }
+
+    public void saveDocument() {
+    }
+
+    public void saveDocumentAs() {
     }
 }
