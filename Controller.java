@@ -7,10 +7,8 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
+
 
 public class Controller {
     private View view;
@@ -79,11 +77,26 @@ public class Controller {
     }
 
     public void openDocument() {
+        
     }
 
     public void saveDocument() {
     }
 
     public void saveDocumentAs() {
+        view.selectHtmlTab();
+        JFileChooser jFileChooser = new JFileChooser();
+        HTMLFileFilter htmlFileFilter = new HTMLFileFilter();
+        jFileChooser.setFileFilter(htmlFileFilter);
+        int choose = jFileChooser.showSaveDialog(view);
+        if (choose == JFileChooser.APPROVE_OPTION) {
+            currentFile = jFileChooser.getSelectedFile();
+            view.setTitle(currentFile.getName());
+            try (FileWriter writer = new FileWriter(currentFile)){
+                new HTMLEditorKit().write(writer, document, 0,document.getLength());
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+        }
     }
 }
